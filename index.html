@@ -131,36 +131,3 @@
 
 </body>
 </html>    
-update_staff_site.start()
-<section class="block" id="staff">
-  <h2 class="reveal">Meet the Staff</h2>
-  <div id="staff-container"><p style="text-align:center">Loading staff...</p></div>
-</section>
-  fetch('staff.json?v=' + Date.now())
-    .then((r) => r.json())
-    .then((data) => {
-      const box = document.getElementById('staff-container');
-      box.innerHTML = '';
-      Object.keys(data).forEach((group) => {
-        if (!data[group].length) return;
-        const title = document.createElement('h3');
-        title.className = 'group-title reveal';
-        title.textContent = group;
-        const grid = document.createElement('div');
-        grid.className = 'grid';
-        data[group].forEach((p) => {
-          const card = document.createElement('div');
-          card.className = 'staff reveal';
-          card.innerHTML = '<img src="' + p.avatar + '" alt="" style="width:84px;height:84px;border-radius:50%;border:3px solid var(--gold);margin-bottom:10px"><div class="role"></div><div class="name"></div>';
-          card.querySelector('.role').textContent = p.role;
-          card.querySelector('.name').textContent = p.name;
-          grid.appendChild(card);
-        });
-        box.appendChild(title);
-        box.appendChild(grid);
-      });
-      document.querySelectorAll('#staff-container .reveal').forEach((el) => observer.observe(el));
-    })
-    .catch(() => {
-      document.getElementById('staff-container').innerHTML = '<p style="text-align:center">Staff list coming soon.</p>';
-    });
