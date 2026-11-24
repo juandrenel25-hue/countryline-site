@@ -78,33 +78,10 @@
     <div class="rule reveal"><b>8. Use tickets.</b> Do not ping the Ownership Team. Open a ticket in the support channel instead.</div>
   </div>
 </section>
-
 <section class="block" id="staff">
   <h2 class="reveal">Meet the Staff</h2>
-
-  <h3 class="group-title reveal">Foundership</h3>
-  <div class="grid">
-    <div class="staff reveal"><div class="role">Founder</div><div class="name">Juandre_Nel_25</div></div>
-    <div class="staff reveal"><div class="role">Co-Founder</div><div class="name">yoyobear12</div></div>
-    <div class="staff reveal"><div class="role">Assistant Founder and Developer</div><div class="name">Bomba</div></div>
-  </div>
-
-  <h3 class="group-title reveal">Management</h3>
-  <div class="grid">
-    <div class="staff reveal"><div class="role">Chief of Staff</div><div class="name">IN_PASTA_WE_TRUST</div></div>
-    <div class="staff reveal"><div class="role">Management</div><div class="name">Chris ❄</div></div>
-  </div>
-
-  <h3 class="group-title reveal">Discord Moderation</h3>
-  <div class="grid">
-    <div class="staff reveal"><div class="role">Lead</div><div class="name">yoyobear12</div></div>
-    <div class="staff reveal"><div class="role">Senior Supervisor</div><div class="name">wifaag1000</div></div>
-    <div class="staff reveal"><div class="role">Senior Supervisor</div><div class="name">Cheappicle</div></div>
-    <div class="staff reveal"><div class="role">Administrator</div><div class="name">BLACKHACKER009</div></div>
-    <div class="staff reveal"><div class="role">Senior Moderator</div><div class="name">Ashleii</div></div>
-  </div>
+  <div id="staff-container"><p style="text-align:center">Loading staff...</p></div>
 </section>
-
 <section class="block perks reveal" id="perks">
   <h2>Donations and Perks</h2>
   <div class="card">
@@ -131,6 +108,34 @@
   }, { threshold: 0.15 });
   items.forEach((el) => observer.observe(el));
 </script>
+  fetch('staff.json?v=' + Date.now())
+    .then((r) => r.json())
+    .then((data) => {
+      const box = document.getElementById('staff-container');
+      box.innerHTML = '';
+      Object.keys(data).forEach((group) => {
+        if (!data[group].length) return;
+        const title = document.createElement('h3');
+        title.className = 'group-title reveal';
+        title.textContent = group;
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+        data[group].forEach((p) => {
+          const card = document.createElement('div');
+          card.className = 'staff reveal';
+          card.innerHTML = '<img src="' + p.avatar + '" alt="" style="width:84px;height:84px;border-radius:50%;border:3px solid var(--gold);margin-bottom:10px"><div class="role"></div><div class="name"></div>';
+          card.querySelector('.role').textContent = p.role;
+          card.querySelector('.name').textContent = p.name;
+          grid.appendChild(card);
+        });
+        box.appendChild(title);
+        box.appendChild(grid);
+      });
+      document.querySelectorAll('#staff-container .reveal').forEach((el) => observer.observe(el));
+    })
+    .catch(() => {
+      document.getElementById('staff-container').innerHTML = '<p style="text-align:center">Staff list coming soon.</p>';
+    });
 
 </body>
 </html>
