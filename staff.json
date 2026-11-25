@@ -1,0 +1,51 @@
+{
+  "Leadership": [
+    {
+      "name": "Juandre_Nel_25",
+      "role": "Founder",
+      "avatar": "https://cdn.discordapp.com/avatars/867748386442575913/5a9017c02af714366473a043390806ac.png?size=128"
+    },
+    {
+      "name": "Yoyobear12",
+      "role": "Co-Founder",
+      "avatar": "https://cdn.discordapp.com/avatars/1265254775461515304/8a0aec7169fa3e423b7384f64cc2312f.png?size=128"
+    },
+    {
+      "name": "Bomba",
+      "role": "Assistant Founder",
+      "avatar": "https://cdn.discordapp.com/avatars/1199290613699457108/26491c407b15578faf51a58b966ab29d.png?size=128"
+    },
+    {
+      "name": "Test subject | IN_PASTA_WE_TRUST",
+      "role": "Management",
+      "avatar": "https://cdn.discordapp.com/avatars/1283040017798926350/8922e15d1dc66c2de3a2b9e5f141c301.png?size=128"
+    },
+    {
+      "name": "MGMT | Chris ❄ | UTC",
+      "role": "Management",
+      "avatar": "https://cdn.discordapp.com/avatars/1046735025623801896/a4922354222b10110e47eb415a7f5741.png?size=128"
+    }
+  ],
+  "Discord Moderation": [
+    {
+      "name": "wifaag1000",
+      "role": "Discord Moderator",
+      "avatar": "https://cdn.discordapp.com/avatars/1118537409911586868/9e99e562cb53ff364c764225975f46aa.png?size=128"
+    },
+    {
+      "name": "BLACKHACKER009",
+      "role": "Discord Moderator",
+      "avatar": "https://cdn.discordapp.com/avatars/1535613620669390944/e9b39c9cf100589f7971e20258b72a44.png?size=128"
+    },
+    {
+      "name": "Ashleii",
+      "role": "Discord Moderator",
+      "avatar": "https://cdn.discordapp.com/avatars/1551161356206481429/4126bba65338fc672921da13530601f3.png?size=128"
+    },
+    {
+      "name": "Cheappicle",
+      "role": "Discord Moderator",
+      "avatar": "https://cdn.discordapp.com/avatars/1467392080631435275/36cf54aaf1c889d0aa517947fe60b4aa.png?size=128"
+    }
+  ]
+}
