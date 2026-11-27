@@ -31,6 +31,7 @@
   .group-title { margin:34px 0 14px; color:var(--gold); font-size:1.3rem; text-align:center; }
   .staff { text-align:center; background:var(--green); border:2px solid var(--gold); border-radius:14px; padding:20px 14px; transition:transform .25s; }
   .staff:hover { transform:translateY(-6px); }
+  .staff img { width:84px; height:84px; border-radius:50%; border:3px solid var(--gold); margin-bottom:10px; }
   .staff .role { color:var(--gold); font-weight:700; font-size:.9rem; text-transform:uppercase; letter-spacing:.5px; }
   .staff .name { font-size:1.15rem; font-weight:700; margin-top:6px; }
   .perks { text-align:center; }
@@ -65,7 +66,9 @@
   <div class="card">
     <p>Country Line Farming is a farming roleplay community built around teamwork, fair play, and good company. Whether you are a seasoned farmer or just planting your first field, there is a place for you here. We run events, support tickets, and a staff team that keeps things friendly and fair.</p>
   </div>
-</section><section class="block" id="rules">
+</section>
+
+<section class="block" id="rules">
   <h2 class="reveal">Server Rules</h2>
   <div class="grid">
     <div class="rule reveal"><b>1. Be respectful.</b> Treat every member and staff member with kindness.</div>
@@ -81,35 +84,7 @@
 
 <section class="block" id="staff">
   <h2 class="reveal">Meet the Staff</h2>
-
-  <h3 class="group-title reveal">Foundership</h3>
-  <div class="grid">
-    <div class="staff reveal"><div class="role">Founder</div><div class="name">Juandre_Nel_25</div></div>
-    <div class="staff reveal"><div class="role">Co-Founder</div><div class="name">yoyobear12</div></div>
-    <div class="staff reveal"><div class="role">Assistant Founder</div><div class="name">Bomba</div></div>
-  </div>
-
-  <h3 class="group-title reveal">Management</h3>
-  <div class="grid">
-    <div class="staff reveal"><div class="role">Chief of Staff</div><div class="name">IN_PASTA_WE_TRUST</div></div>
-    <div class="staff reveal"><div class="role">Management</div><div class="name">Chris ❄</div></div>
-  </div>
-
-  <h3 class="group-title reveal">Developers</h3>
-  <div class="grid">
-<div class="staff reveal"><div class="role">Lead Developer</div><div class="name">Juandre_Nel_25</div></div>
-<div class="staff reveal"><div class="role">Developer</div><div class="name">Gamerzboy</div></div>
-<div class="staff reveal"><div class="role">Developer</div><div class="name">Bomba</div></div>
-  </div>
-
-  <h3 class="group-title reveal">Discord Moderation</h3>
-  <div class="grid">
-    <div class="staff reveal"><div class="role">Lead</div><div class="name">yoyobear12</div></div>
-    <div class="staff reveal"><div class="role">Senior Supervisor</div><div class="name">wifaag1000</div></div>
-    <div class="staff reveal"><div class="role">Senior Supervisor</div><div class="name">Cheappicle</div></div>
-    <div class="staff reveal"><div class="role">Administrator</div><div class="name">BLACKHACKER009</div></div>
-    <div class="staff reveal"><div class="role">Senior Moderator</div><div class="name">Ashleii</div></div>
-  </div>
+  <div id="staff-container"><p style="text-align:center">Loading staff...</p></div>
 </section>
 
 <section class="block perks reveal" id="perks">
@@ -127,7 +102,6 @@
 </footer>
 
 <script>
-  const items = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -136,7 +110,45 @@
       }
     });
   }, { threshold: 0.15 });
-  items.forEach((el) => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  fetch('staff.json?v=' + Date.now())
+    .then((r) => r.json())
+    .then((data) => {
+      const box = document.getElementById('staff-container');
+      box.innerHTML = '';
+      Object.keys(data).forEach((group) => {
+        if (!data[group].length) return;
+        const title = document.createElement('h3');
+        title.className = 'group-title reveal';
+        title.textContent = group;
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+        data[group].forEach((p) => {
+          const card = document.createElement('div');
+          card.className = 'staff reveal';
+          const img = document.createElement('img');
+          img.src = p.avatar;
+          img.alt = '';
+          const role = document.createElement('div');
+          role.className = 'role';
+          role.textContent = p.role;
+          const name = document.createElement('div');
+          name.className = 'name';
+          name.textContent = p.name;
+          card.appendChild(img);
+          card.appendChild(role);
+          card.appendChild(name);
+          grid.appendChild(card);
+        });
+        box.appendChild(title);
+        box.appendChild(grid);
+      });
+      document.querySelectorAll('#staff-container .reveal').forEach((el) => observer.observe(el));
+    })
+    .catch(() => {
+      document.getElementById('staff-container').innerHTML = '<p style="text-align:center">Staff list coming soon.</p>';
+    });
 </script>
 
 </body>
